@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfyh53c231kd"]
+
+[ext_resource type="Script" path="res://src/caladrius.gd" id="1_ykent"]
+
+[node name="Caladrius Blaze" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_ykent")
+
+[node name="MemUsage" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.5
+offset_top = -15.5
+offset_right = 51.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 28
+
+[node name="LoadDAT" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Extract from PFW3 archive."
+text = "Extract .mma Archive"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -145.5
+offset_top = 44.0
+offset_right = 160.5
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FILELoadARC" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Open File(s)"
+initial_position = 2
+size = Vector2i(452, 400)
+ok_button_text = "Open"
+file_mode = 1
+access = 2
+filters = PackedStringArray("*.mma")
+use_native_dialog = true
+
+[node name="FILELoadFOLDER" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Open a Directory"
+initial_position = 2
+size = Vector2i(452, 400)
+ok_button_text = "Select Current Folder"
+file_mode = 2
+access = 2
+use_native_dialog = true
+
+[connection signal="pressed" from="HBoxContainer/LoadDAT" to="." method="_on_load_dat_pressed"]
+[connection signal="files_selected" from="FILELoadARC" to="." method="_on_file_load_arc_files_selected"]
+[connection signal="dir_selected" from="FILELoadFOLDER" to="." method="_on_file_load_folder_dir_selected"]
